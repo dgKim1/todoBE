@@ -7,6 +7,11 @@ const userController = {};
 userController.createUser = async (req, res) => {
   try {
     const { email, name, password } = req.body;
+    if (!email || !name || !password) {
+      return res
+        .status(400)
+        .json({ status: "fail", message: "모든 필드를 입력해주세요." });
+    }
     const user = await User.findOne({ email });
 
     if (user) {
@@ -26,6 +31,11 @@ userController.createUser = async (req, res) => {
 userController.loginWithEmail = async (req, res) => {
   try {
     const { email, password } = req.body;
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ status: "fail", message: "이메일과 비밀번호를 입력해주세요." });
+    }
     const user = await User.findOne({ email }, "-createdAt -updatedAt -__v");
     if (user) {
       const isMath = bcrypt.compareSync(password, user.password);

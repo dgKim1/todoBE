@@ -11,6 +11,12 @@ const taskSchema = Schema(
       type: Boolean,
       required: true,
     },
+    author: {
+      //레퍼런스 user모델의 id를 참조  --> schema.types.objectid
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
   },
   { timestamps: true }
 );

@@ -4,7 +4,6 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const indexRouter = require("./routes/index");
 const app = express();
-app.use(express.json());
 require("dotenv").config();
 
 const mongoURI = process.env.MONGODB_URI_PROD;
@@ -16,7 +15,6 @@ app.use(
 );
 
 app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: true }));
 app.use("/api", indexRouter);
 
 mongoose
